@@ -39,11 +39,11 @@ Setup
 
 Benefits
 
-Scalable, cost-effective, reliable, secure, and accessible
+- Scalable, cost-effective, reliable, secure, and accessible
 
 Future Plans
 
-Geo-location search
-User submissions
-Enhanced UI
-CI/CD pipeline
+- Geo-location search
+- User submissions
+- Enhanced UI
+- CI/CD pipeline
