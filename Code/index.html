@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Baltimore Community Resource Finder</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 0; padding: 0; background:#f6f7fb; }
+    header { background:#243b53; color:#fff; padding: 24px 16px; }
+    header h1 { margin: 0 0 8px; font-size: 24px; }
+    main { max-width: 900px; margin: 24px auto; padding: 0 16px; }
+    .card { background:#fff; border-radius: 12px; padding:16px; margin:12px 0; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+    .row { display:flex; gap:8px; flex-wrap:wrap; margin-bottom: 16px; }
+    select, input, button { padding:10px 12px; border-radius:10px; border:1px solid #ccd5e0; font-size:16px; }
+    button { background:#243b53; color:#fff; cursor:pointer; }
+    button:disabled { opacity: .7; cursor: not-allowed; }
+    .muted { color:#6b7280; font-size: 14px; }
+    .results { margin-top: 12px; }
+    .name { font-weight:600; font-size:18px; }
+    .meta { margin-top:6px; }
+    a { color:#1f6feb; text-decoration:none; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Baltimore Community Resource Finder</h1>
+    <div class="muted">Find food pantries, shelters, and free clinics near you.</div>
+  </header>
+  <main>
+    <div class="card">
+      <div class="row">
+        <select id="category">
+          <option value="">All Categories</option>
+          <option value="food">Food Pantry</option>
+          <option value="shelter">Shelter</option>
+          <option value="clinic">Free Clinic</option>
+        </select>
+        <input id="query" placeholder="Search (e.g., pantry, women, kids)" />
+        <button id="searchBtn">Search</button>
+      </div>
+      <div class="muted">Tip: Choose a category and/or type a keyword like <em>pantry</em> or <em>women</em>.</div>
+    </div>
+
+    <div class="results" id="results"></div>
+  </main>
+
+  <script>
+    // 🔑 Replace this with your actual API Gateway Invoke URL
+    const API_BASE = "https://example-api-id.execute-api.us-east-1.amazonaws.com";
+
+    async function search(defaultCategory = "", defaultQuery = "") {
+      const category = document.getElementById('category').value || defaultCategory;
+      const query = document.getElementById('query').value.trim() || defaultQuery;
+      const btn = document.getElementById('searchBtn');
+      const results = document.getElementById('results');
+
+      btn.disabled = true;
+      results.innerHTML = '<div class="card">Searching…</div>';
+      const url = new URL(API_BASE + '/search');
+      if (category) url.searchParams.set('category', category);
+      if (query) url.searchParams.set('query', query);
+
+      try {
+        const resp = await fetch(url.toString(), { method: 'GET' });
+        if (!resp.ok) throw new Error('Request failed');
+        const data = await resp.json();
+
+        if (!data.items || data.items.length === 0) {
+          results.innerHTML = '<div class="card">No results. Try a different keyword.</div>';
+          return;
+        }
+
+        results.innerHTML = data.items.map(item => `
+          <div class="card">
+            <div class="name">${item.name || ''}</div>
+            <div class="meta">Category: <strong>${item.category || ''}</strong></div>
+            <div class="meta">Address: ${item.address || ''} ${item.zip ? '(' + item.zip + ')' : ''}</div>
+            <div class="meta">Hours: ${item.hours || ''}</div>
+            <div class="meta">Phone: ${item.phone || ''}</div>
+            <div class="meta">Website: ${item.website ? `<a href="${item.website}" target="_blank" rel="noopener">Visit</a>` : '—'}</div>
+            ${Array.isArray(item.tags) ? `<div class="meta muted">Tags: ${item.tags.join(', ')}</div>` : ''}
+          </div>
+        `).join('');
+      } catch (e) {
+        results.innerHTML = `<div class="card">Error: ${e.message}</div>`;
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    document.getElementById('searchBtn').addEventListener('click', () => search());
+    // Auto-run a default search for food pantries when the page loads
+    window.onload = () => search("food", "");
+  </script>
+</body>
+</html>
