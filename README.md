@@ -37,6 +37,7 @@ Setup
 6. **VPC/IGW** → Confirm default VPC available
 
 Sample Response
+
 {
 "count": 2,
 "items": [
@@ -53,9 +54,11 @@ Sample Response
 }
 
 Benefits
+
 Scalable, cost-effective, reliable, secure, and accessible
 
 Future Plans
+
 Geo-location search
 User submissions
 Enhanced UI
