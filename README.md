@@ -36,22 +36,6 @@ Setup
 5. **IAM** → Attach DynamoDB + CloudWatch policy to Lambda role
 6. **VPC/IGW** → Confirm default VPC available
 
-Sample Response
-
-{
-"count": 2,
-"items": [
-{
-"name": "Eastside Food Pantry",
-"category": "food",
-"address": "123 Main St",
-"zip": "21201",
-"hours": "Mon-Fri 9am-5pm",
-"phone": "555-123-4567",
-"tags": ["kids", "groceries"]
-}
-]
-}
 
 Benefits
 
