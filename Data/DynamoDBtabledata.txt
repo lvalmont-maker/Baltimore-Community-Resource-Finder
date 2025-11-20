@@ -1,0 +1,65 @@
+Item 1 (Food pantry)
+id: foodpantry-1
+name: Baltimore Hunger Project Pantry
+category: food
+address: 1215 E Fort Ave, Baltimore, MD
+zip: 21230
+hours: Tue–Sat 10am–4pm
+phone: (410) 555-0141
+website: https://www.baltimorehungerproject.org/
+tags (List of String): kids, groceries, citywide
+  
+Item 2 (Food pantry)
+id: foodpantry-2
+name: Eastside Community Food Bank
+category: food
+address: 1012 N Broadway, Baltimore, MD
+zip: 21205
+hours: Mon–Fri 9am–3pm
+phone: (410) 555-0192
+website: https://example.org/eastside-food
+tags: walk-in, produce, families
+  
+Item 3 (Shelter)
+id: shelter-1
+name: Harbor House Emergency Shelter
+category: shelter
+address: 200 Light St, Baltimore, MD
+zip: 21202
+hours: 24/7
+phone: (410) 555-0175
+Website: https://www.findhelp.org/argus-community--bronx-ny--harbor-house-i-intensive-residential-treatment/6337234039078912?postal=10451
+tags: women, emergency, intake
+  
+Item 4 (Shelter)
+id: shelter-2
+name: West Baltimore Family Shelter
+category: shelter
+address: 1800 W Fulton St, Baltimore, MD
+zip: 21223
+hours: 24/7
+phone: (410) 555-0188
+website: https://example.org/wb-family
+tags: families, meals, overnight
+  
+Item 5 (Clinic)
+id: clinic-1
+name: Baltimore Free Clinic
+category: clinic
+address: 33 N Charles St, Baltimore, MD
+zip: 21201
+hours: Mon–Fri 9am–5pm
+phone: (410) 555-0119
+website: https://health.baltimorecity.gov/health-clinics-services/primary-care-clinics-uninsured
+tags: free, primary-care, screenings
+  
+Item 6 (Clinic)
+id: clinic-2
+name: East Baltimore Community Health
+category: clinic
+address: 2100 Orleans St, Baltimore, MD
+zip: 21287
+hours: Sat 9am–1pm; Tue–Thu 10am–6pm
+phone: (410) 555-0160
+website: https://example.org/ebch
+tags: vaccines, walk-in, low-cost
